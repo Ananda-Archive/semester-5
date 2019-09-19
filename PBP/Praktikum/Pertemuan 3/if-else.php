@@ -20,7 +20,7 @@
 	}else if ($nilai >= 40 && $nilai < 60){
 		echo 'Nilai : C <br />';
 	}else if ($nilai >= 20 && $nilai < 40){
-		echo 'Nilai : D <br />';
+		echo 'Nilai : D <br />';	
 	}else if ($nilai >= 0 && $nilai < 20){
 		echo 'Nilai : E <br />';
 	}else {
