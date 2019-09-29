@@ -21,27 +21,55 @@ Deskripsi : Form untuk menerima input data customer -->
 				$email = test_input($_POST['email']);
 				if ($name == ''){
 					$error_name = "Name is required";
+					$valid_name = FALSE;
 				}elseif (!preg_match("/^[a-zA-Z ]*$/",$name)) {
 					$error_name = "Only letters and white space allowed";
+				}else{
+					$valid_name = TRUE;
 				}
 				if ($address == ''){
 					$error_address = "Address is required";
+					$valid_address = FALSE;
 				}else{
 					$address = test_input($_POST['address']);
+					$valid_address = TRUE;
 				}
 				if (empty($_POST["gender"])) {
 			    	$genderErr = "Gender is required";
+			    	$valid_gender = FALSE;
 				}else {
 				    $gender = $_POST["gender"];
+				    $valid_gender = TRUE;
 				}
 				if($email == ''){
 					$error_email = "Email is required";
+					$valid_email = FALSE;
 				}else {
 					$email = test_input($_POST["email"]);
+					$valid_email = TRUE;
 				}
 				if (!empty($_POST['hobby'])){
 					foreach ($_POST['hobby'] as $hobby_item) {
 						array_push($hobby, $hobby_item);
+					}
+					$valid_hobby = TRUE;
+				}else{
+					$valid_hobby = FALSE;
+				}
+				if($valid_name && $valid_address && $valid_gender && $valid_email){
+					require_once('db_login.php');
+					$db = new mysqli($db_host, $db_username, $db_password, $db_database);
+					if($db->connect_errno){
+						die("Couldn't connect to the databse: " . $db->connect_error);
+					}
+					$name = $db->real_escape_string($name);
+					$address = $db->real_escape_string($address);
+					$query = "INSERT INTO customers (name, address) VALUES('$name', '$address')";
+					$result = $db->query($query);
+					if(!$result){
+						die("Couldn't query the database: " . $db->error);
+					}else{
+						echo "1 record added";
 					}
 				}
 			}
