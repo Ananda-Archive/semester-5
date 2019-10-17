@@ -103,7 +103,7 @@ public class Pemesanan implements PemesananInterface{
                 pembeli.setNama(result.getString("pembeli.namapembeli"));
                 pesawat.setId(result.getInt("pesawat.idpesawat"));
                 pesawat.setNama(result.getString("pesawat.namapesawat"));
-                PemesananTO pemesanan = new PemesananTO(pesawat,pembeli);
+                PemesananTO pemesanan = new PemesananTO(0,pesawat,pembeli);
                 pemesanan.setId(result.getInt("pemesanan.idpemesanan"));
                 list.add(pemesanan);
             }

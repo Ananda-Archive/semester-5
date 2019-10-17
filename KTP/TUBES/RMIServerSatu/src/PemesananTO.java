@@ -8,9 +8,10 @@ public class PemesananTO implements java.io.Serializable{
         
     }
     
-    public PemesananTO(PesawatTO pesawat, PembeliTO pembeli){
+    public PemesananTO(int id, PesawatTO pesawat, PembeliTO pembeli){
         this.pesawat = pesawat;
         this.pembeli = pembeli;
+        this.id = id;
     }
     
     public PesawatTO getPesawat(){
